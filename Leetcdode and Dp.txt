@@ -1,0 +1,160 @@
+#---------------------MAtrix Rotation 90 deg--------------
+class Solution {
+    public void rotate(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++)
+        {
+            for(int j=0;j<matrix[i].length;j++)
+            {
+                if(j>=i)
+                {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+        for(int i=0;i<matrix.length;i++)
+        {
+            int l = 0 , r = matrix[i].length - 1;
+            while(l <= r)
+            {
+                int t = matrix[i][l];
+                matrix[i][l] = matrix[i][r];
+                matrix[i][r] = t;
+                l++;
+                r--;
+            }
+        }
+    }
+}
+
+#---LeeetCOde---
+#-----------ROman to integer---
+class Solution {
+    public int romanToInt(String s) {
+        Map<Character,Integer> hm = new LinkedHashMap<>();
+        hm.put('I',1);
+        hm.put('V',5);
+        hm.put('X',10);
+        hm.put('L',50);
+        hm.put('C',100);
+        hm.put('D',500);
+        hm.put('M',1000);
+
+        int r = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            if( i+1 < s.length() && (hm.get(s.charAt(i+1)) > hm.get(s.charAt(i))))
+            {
+                r+=(hm.get(s.charAt(i+1)) - hm.get(s.charAt(i))); 
+                i++;
+            }
+            else
+                r+=(hm.get(s.charAt(i)));
+        }
+        return r;
+    }
+}
+
+#-----Lomgest common subsequence---
+class Solution {
+    public int longestCommonSubsequence(String text1, String text2) {
+        int[][] arr = new int[text1.length()+1][text2.length()+1];
+        for(int i=0;i<arr.length;i++) 
+        {
+            arr[i][0] = 0;
+        }
+        for(int i=0;i<arr[0].length;i++) 
+        {
+            arr[0][i] = 0;
+        }
+
+        for(int i=1;i<arr.length;i++)
+        {
+            for(int j=1;j<arr[0].length;j++)
+            {
+                if(text1.charAt(i-1)==text2.charAt(j-1))
+                {
+                    arr[i][j] = 1 + arr[i-1][j-1];
+                }
+                else
+                {
+                    arr[i][j] = Math.max(arr[i-1][j],arr[i][j-1]);
+                }
+            }
+        }
+        return arr[arr.length-1][arr[0].length-1];
+    }
+}
+
+
+#---Minimum Path Graph Matrix----
+
+#--doesnt work---maze runner
+import java.util.*;
+public class dp {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+        int[][] dp = new int[n][n];
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                arr[i][j]=sc.nextInt();
+            }
+        }
+        boolean flag = false;
+        for(int i=0;i<n;i++)
+        {
+            if(flag || arr[i][0]==1)
+            {
+                dp[i][0]=0;
+                flag = true;
+            }
+            else
+            dp[i][0]=1;
+        }
+        flag = false;
+        for(int i=0;i<n;i++)
+        {
+            if(flag || arr[0][i]==1)
+            {
+                dp[0][i]=0;
+                flag = true;
+            }
+            else
+            dp[0][i]=1;
+        }
+        for(int i=1;i<n;i++)
+        {
+            for(int j=1;j<n;j++)
+            {
+                if(arr[i][j]==1)
+                {
+                    dp[i][j]=0;
+                }
+                else{
+                    dp[i][j] = dp[i-1][j] + dp[i][j-1];
+                }
+            }
+        }
+        if(dp[n-1][n-1]!=0)
+        {
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                System.out.print(dp[i][j]+" ");
+            }
+            System.out.println();
+        }
+        }
+        else
+        {
+            System.out.println("No solution exists");
+        }
+    }
+}
+

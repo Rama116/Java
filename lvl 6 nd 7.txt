@@ -1,0 +1,579 @@
+
+#-----permutation possibilities----
+import java.util.*;
+public class Main
+{
+    public static void per(String input, String output, List<String> result)
+    {
+        if (input.length() == 0)
+        {
+            result.add(output);
+        }
+        for (int i = 0; i < input.length(); i++)
+        {
+            char c = input.charAt(i);
+            String rem = input.substring(0, i) + input.substring(i + 1);
+            per(rem, output + c, result);
+        }
+    }
+
+    public static void main(String[] args)
+    {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.next();
+        List<String> result = new ArrayList<>();
+        per(s, "", result);
+        Collections.sort(result);
+        System.out.println(result.size());
+        for (String perm : result)
+        {
+            System.out.println(perm);
+        }
+    }
+}
+
+#---duplicate eleemtn removal coutn--
+import java.util.*;
+public class Main{
+    public static void main(String lkh[]){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Map<Character,Integer> hm = new LinkedHashMap<>();
+        for(char i: s.toCharArray())
+        {
+            hm.put(i,hm.getOrDefault(i,0)+1);
+        }
+        int r = 0;
+        for(int i : hm.values())
+        {
+            if(i>1)
+            {
+                r+=(i-1);
+            }
+        }
+        System.out.println(r);
+    }
+}
+
+#---Neeed to learn this program pending!!!--
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Main {
+
+    // Function to count the trailing zeroes in factorial of a number
+    private static int countTrailingZeroes(int n) {
+        int count = 0;
+        while (n > 0) {
+            n /= 5;
+            count += n;
+        }
+        return count;
+    }
+
+    // Function to find all n such that n! has exactly m trailing zeroes
+    private static List<Integer> findNForTrailingZeroes(int m) {
+        List<Integer> result = new ArrayList<>();
+        
+        int low = 0;
+        int high = Integer.MAX_VALUE;
+        int firstValidN = -1;
+        
+        // Binary search to find the first n such that n! has at least m trailing zeroes
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int zeros = countTrailingZeroes(mid);
+            
+            if (zeros < m) {
+                low = mid + 1;
+            } else {
+                if (zeros == m) {
+                    firstValidN = mid;
+                }
+                high = mid - 1;
+            }
+        }
+        
+        // If no valid n is found, return an empty list
+        if (firstValidN == -1) {
+            return result;
+        }
+        
+        // Find all n starting from firstValidN with exactly m trailing zeroes
+        int current = firstValidN;
+        while (countTrailingZeroes(current) == m) {
+            result.add(current);
+            current++;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+
+        for (int i = 0; i < t; i++) {
+            int m = sc.nextInt();
+            List<Integer> result = findNForTrailingZeroes(m);
+
+            if (result.isEmpty()) {
+                System.out.println(0);
+            } else {
+                System.out.println(result.size());
+                for (int n : result) {
+                    System.out.print(n + " ");
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}
+
+
+#---------------------MAtrix Rotation 90 deg--------------
+class Solution {
+    public void rotate(int[][] matrix) {
+        for(int i=0;i<matrix.length;i++)
+        {
+            for(int j=0;j<matrix[i].length;j++)
+            {
+                if(j>=i)
+                {
+                    int temp = matrix[i][j];
+                    matrix[i][j] = matrix[j][i];
+                    matrix[j][i] = temp;
+                }
+            }
+        }
+        for(int i=0;i<matrix.length;i++)
+        {
+            int l = 0 , r = matrix[i].length - 1;
+            while(l <= r)
+            {
+                int t = matrix[i][l];
+                matrix[i][l] = matrix[i][r];
+                matrix[i][r] = t;
+                l++;
+                r--;
+            }
+        }
+    }
+}
+
+#---LeeetCOde---
+#-----------ROman to integer---
+class Solution {
+    public int romanToInt(String s) {
+        Map<Character,Integer> hm = new LinkedHashMap<>();
+        hm.put('I',1);
+        hm.put('V',5);
+        hm.put('X',10);
+        hm.put('L',50);
+        hm.put('C',100);
+        hm.put('D',500);
+        hm.put('M',1000);
+
+        int r = 0;
+        for(int i=0;i<s.length();i++)
+        {
+            if( i+1 < s.length() && (hm.get(s.charAt(i+1)) > hm.get(s.charAt(i))))
+            {
+                r+=(hm.get(s.charAt(i+1)) - hm.get(s.charAt(i))); 
+                i++;
+            }
+            else
+                r+=(hm.get(s.charAt(i)));
+        }
+        return r;
+    }
+}
+
+#----Pair of a number sum and finding minimum in it----
+import java.util.*;
+public class main{
+    public static void main(String olkkjk[]){
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        long min = Long.MAX_VALUE;
+        for(long i = 1 ; i*i <= n ; i++)
+        {
+            if(n%i==0)
+            {
+                long a = n/i;
+                long sum = i+a;
+                if(min > sum) 
+                {
+                    min = sum;
+                }
+            }
+        }
+        System.out.println(min);
+    }
+}
+
+#----funda program ashish neel lavadekabal----
+import java.util.*;
+public class Main{
+    public static void main(String lkhg[]){
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        for(int k = 0 ; k<t ; k++)
+        {
+            int n = sc.nextInt();
+            int[] arr = new int[n];
+            boolean turn = false;
+            for(int i = 0; i<n;i++)
+            {
+                arr[i] = sc.nextInt();
+            }
+            for(int i=0;i<n-1;i++)
+            {
+                if((arr[0] > arr[i+1]) || (arr[i] < arr[i+1]))
+                {
+                    turn = true;
+                    break;
+                }
+                else
+                {
+                    turn = false;
+                    break;
+                }
+                
+            }
+            if(turn) System.out.println("Ashish");
+            else System.out.println("Jeel");
+        }
+    }
+}
+
+
+#-----days km reached with exception---
+import java.util.*;
+public class Main{
+    public static void main(String ljhqf[]){
+        Scanner sc = new Scanner(System.in);
+        int s = sc.nextInt();
+        int x = sc.nextInt();
+        int n  = sc.nextInt();
+        
+        Map<Integer,Integer> hm = new LinkedHashMap<>();
+        
+        for(int i=0; i<n; i++)
+        {
+            int t = sc.nextInt();
+            int y = sc.nextInt();
+            hm.put(t,y);
+        }
+        
+        int d = 0;
+        while(s>0)
+        {
+            d++;
+            if(hm.containsKey(d)) s-=hm.get(d);
+            else s-=x;
+        }
+        
+        System.out.println(d);
+    }
+}
+
+#----odd product ek cases is not working--
+import java.util.*;
+import java.util.regex.*;
+public class Main{
+    public static void main(String asf[]){
+        Scanner sc = new Scanner(System.in);
+        String s1 = sc.nextLine();
+        String s2 = sc.nextLine();
+        
+        Pattern p = Pattern.compile("\\d+");
+        Matcher m = p.matcher(s1);
+        Matcher m1 = p.matcher(s2);
+        
+        List<Integer> al = new ArrayList<>();
+        
+        while(m.find())
+        {
+            int r = Integer.parseInt(m.group());
+            al.add(r);
+        }
+        int[] arr = new int[al.size()];
+        
+        for(int i=0;i<al.size();i++){
+            arr[i] = al.get(i);
+        }
+        
+        al.clear();
+        while(m1.find())
+        {
+            int r = Integer.parseInt(m1.group());
+            al.add(r);
+        }
+        int[] brr = new int[al.size()];
+        
+        for(int i=0;i<al.size();i++){
+            brr[i] = al.get(i);
+        }
+        
+        int c1=0,c2 = 0;
+    
+        for(int i=0;i<arr.length;i++)
+        {
+            if(arr[i]%2!=0) c1++;
+        }   
+        for(int i=0;i<brr.length;i++)
+        {
+            if(brr[i]%2!=0) c2++;
+        }
+        
+        System.out.println((c1*c2));
+        
+    }
+}
+
+import java.util.*;
+public class Main{
+    public static void main(String lkljh[]){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        
+        if(n<=3) System.out.println("true");
+        
+        boolean[] dp = new boolean[n+1];
+        
+        dp[1] = true;
+        dp[2] = true;
+        dp[3] = true;
+        dp[4] = false;
+        
+        for(int i=5;i<=n;i++)
+        {
+            dp[i] = !dp[i-1] || !dp[i-2] || !dp[i-3];
+        }
+        
+        if(dp[n]) System.out.println("true");
+        else System.out.println("false");
+    }
+}
+
+
+
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+	    Scanner sc=new Scanner(System.in);
+	    String num=sc.nextLine();
+	    int half=num.length()/2;
+	    int leftq=0,rightq=0,leftnum=0,rightnum=0;
+	    for(int i=0;i<half;i++)
+	    {
+	        if(num.charAt(i)=='?')
+	        {
+	            leftq++;
+	        }
+	        else
+	        {
+	            leftnum+=num.charAt(i)-'0';
+	        }
+	        if(num.charAt(half+i)=='?')
+	        {
+	            rightq++;
+	        }
+	        else
+	        {
+	            rightnum+=num.charAt(half+i)-'0';
+	        }
+	    }
+	    int balance=(leftq-rightq)*9/2;
+	    int diff=rightnum-leftnum;
+	    System.out.print(balance!=diff);
+	   	}
+}
+
+
+#---Lvl7 backtrack---
+import java.util.*;
+public class Main{
+    public static boolean backtrack(int x,int y,int n,int[][] v,int[][] sol){
+        if(x==n-1 && y==n-1 && v[x][y]==0){
+            sol[x][y]=1;
+            return true;
+        }
+        if(x>=0 && x<=n-1 && y>=0 && y<=n-1 && v[x][y]==0 && sol[x][y]==0){
+            sol[x][y]=1;
+            if(backtrack(x+1,y,n,v,sol)==true){
+                return true;
+            }
+            if(backtrack(x,y+1,n,v,sol)==true){
+                return true;
+            }
+            sol[x][y]=0;
+        }
+        return false;
+    }
+    public static void main(String[] args){
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        int[][] v=new int[n][n];
+        int[][] sol=new int[n][n];
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                v[i][j]=sc.nextInt();
+                sol[i][j]=0;
+            }
+        }
+        if(backtrack(0,0,n,v,sol)==true){
+            for(int i=0;i<n;i++){
+                for(int j=0;j<n;j++){
+                    System.out.print(sol[i][j]+" ");
+                }System.out.println();
+            }
+        }
+        else{
+            System.out.print("No solution exists");
+        }
+    }
+}
+
+#---solvedbyme later--
+import java.util.*;
+public class Main{
+        public static boolean maze(int x,int y,int n,int arr[][],int[][] sol)
+        {
+            if(x==n-1 && y==n-1 && arr[x][y]==0)
+            {
+                sol[x][y] = 1;
+                return true;
+            }
+            
+            if(x>=0 && x<=n-1 && y>=0 && y<=n-1 && arr[x][y]==0)
+            {
+                sol[x][y] = 1;
+                
+                if(maze(x+1,y,n,arr,sol)==true)
+                {
+                    return true;
+                }
+                
+                if(maze(x,y+1,n,arr,sol)==true)
+                {
+                    return true;
+                }
+                
+                sol[x][y] = 0;
+                return false;
+            }
+            return false;
+        }
+    
+    public static void main(String alfj[]){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+        int[][] sol = new int[n][n];
+        
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                arr[i][j] = sc.nextInt();
+                sol[i][j] =0;
+            }
+        }
+        
+        if(maze(0,0,n,arr,sol)==true)
+        {
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    System.out.print(sol[i][j]+" ");
+                }
+                System.out.println();
+            }
+        }
+        else System.out.println("No solution exists");
+        
+    }
+}
+
+#----back track source from anywhere--
+import java.util.*;
+public class Main{
+    
+    public static boolean back(int x,int y,int n,int[][] arr,int[][] sol,List<Integer> al)
+    {
+        if((x==n-1 && y==n-1) || (x==0 && y==n-1) || (x==n-1 && y==0) || (x==0 && y==0) && arr[x][y]==0)
+        {
+            al.add(0);
+            sol[x][y] = 1;
+            return true;
+        }
+        
+        if(x>=0 && x<=n-1 && y>=0 && y<=n-1 && arr[x][y]==0 && sol[x][y]==0)
+        {
+            sol[x][y] = 1;
+            if(back(x+1,y,n,arr,sol,al)==true)
+            {
+                al.add(0);
+                return true;
+            }
+            if(back(x,y+1,n,arr,sol,al)==true)
+            {
+                al.add(0);
+                return true;
+            }
+            if(back(x-1,y,n,arr,sol,al)==true)
+            {
+                al.add(0);
+                return true;
+            }
+            if(back(x,y-1,n,arr,sol,al)==true)
+            {
+                al.add(0);
+                return true;
+            }
+            sol[x][y] = 0;
+            return false;
+        }
+            return false;
+    }
+    
+    public static void main(String ksjh[]){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int[][] arr = new int[n][n];
+        int[][] sol = new int[n][n];
+        
+        int x1 = sc.nextInt();
+        int y1 = sc.nextInt();
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                arr[i][j] = sc.nextInt();
+                sol[i][j] = 0;
+            }
+        }
+        List<Integer> al  = new ArrayList<>();
+        
+        if(back(x1,y1,n,arr,sol,al)==true)
+        {
+            System.out.println("Minimum Steps: "+al.size());
+            for(int i=0;i<n;i++)
+            {
+                for(int j=0;j<n;j++)
+                {
+                    System.out.print(sol[i][j]+" ");
+                }
+                    System.out.println();
+            }
+        }
+        else 
+            System.out.println("No solution exists");
+    }
+}

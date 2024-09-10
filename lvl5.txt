@@ -1,0 +1,400 @@
+	#----bit check 1st and last digit as 1 and center digits as 0----
+import java.util.*;
+public class Main
+{
+    public static void main(String lkh[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        boolean turn=false;
+        boolean f = true;
+        int[] arr = new int[32];
+        int k=0;
+        for(int i=31;i>=0;i--)
+        {
+            int a = (n>>i)&1;
+            if(a==1)
+            turn=true;
+            
+            if(turn)
+            arr[k++]=a;
+        }
+        for(int i=1;i<k-1;i++)
+        {
+            if(arr[i]==1)
+            f=false;
+        }
+        if(arr[0]==1 && arr[k-1]==1 && f)
+        System.out.println("yes");
+        else
+        System.out.println("no");
+        
+    }
+}
+
+
+#----convert last element as 1 if 0 else 1 and convert to number---
+
+import java.util.*;
+public class Main
+{
+    public static void main(String lkh[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        boolean turn=false;
+        boolean f = true;
+        int[] arr = new int[32];
+        int k=0;
+        for(int i=31;i>=0;i--)
+        {
+            int a = (n>>i)&1;
+            if(a==1)
+            turn=true;
+            
+            if(turn)
+            arr[k++]=a;
+        }
+        int b=sc.nextInt();
+        if(arr[k-b]==0)
+        arr[k-b]=1;
+        int r=0;
+        for(int i=0;i<k;i++)
+        {
+            r=(r<<1)|arr[i];
+        }
+        System.out.println(r);
+        
+    }
+}
+
+
+#----convert last element as 1 if 0 vice versa and convert to number---
+
+
+import java.util.*;
+public class Main
+{
+    public static void main(String lkh[])
+    {
+        Scanner sc=new Scanner(System.in);
+        int n=sc.nextInt();
+        boolean turn=false;
+        boolean f = true;
+        int[] arr = new int[32];
+        int k=0;
+        for(int i=31;i>=0;i--)
+        {
+            int a = (n>>i)&1;
+            if(a==1)
+            turn=true;
+            
+            if(turn)
+            arr[k++]=a;
+        }
+        int b=sc.nextInt();
+        if(arr[k-b]==0)
+        arr[k-b]=1;
+        else
+        arr[k-b]=0;
+        int r=0;
+        for(int i=0;i<k;i++)
+        {
+            r=(r<<1)|arr[i];
+        }
+        System.out.println(r);
+        
+    }
+}
+
+#---toggle the l+1 bit and find the number----
+import java.util.*;
+public class main{
+    public static void main(String lkjh[]){
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        int l = sc.nextInt();
+        boolean turn = false;
+        int k=0;
+        int[] arr = new int[32];
+        for(int i=31;i>=0;i--)
+        {
+            int a = (n>>i)&1;
+            if(a==1)
+            turn=true;
+            if(turn)
+            arr[k++]=a;
+        }
+
+
+    int m = 1<<l;
+    int r=n^m;
+    System.out.println(r);
+    
+}
+}	
+
+#----1st 4 bit shift right and next 4 bit to the left--
+import java.util.Scanner;
+
+public class BitwiseSwap {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        int right4 = number & 0x0F;
+        int left4 = (number & 0xF0) >> 4;
+        int swapped = (right4 << 4) | left4;
+        System.out.println(swapped);
+    }
+}
+
+#-----Funda program---
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int number = sc.nextInt();
+        int leftmost=(number & 0xF0) >> 4;
+        System.out.print(leftmost);
+    }
+}
+
+#----Spiral rotation----
+import java.util.*;
+public class main{
+    public static void main(String lkjh[]){
+        Scanner sc = new Scanner(System.in);
+        int n1=sc.nextInt();
+        int n2=sc.nextInt();
+        int[][] arr = new int[n1][n2];
+        for(int i=0;i<n1;i++)
+        {
+            for(int j=0;j<n2;j++)
+            {
+                arr[i][j]=sc.nextInt();
+            }
+        }
+        int rs=0,re=arr.length-1;
+        int cs=0,ce=arr[0].length-1;
+        while(rs<=re && cs<=ce)
+        {
+            for(int i=cs;i<=ce;i++)
+            {
+                System.out.print(arr[rs][i]+" ");
+            }
+            rs++;
+            for(int i=rs;i<=re;i++)
+            {
+                System.out.print(arr[i][ce]+" ");
+            }
+            ce--;
+            if(rs<=re)
+            {
+                for(int i=ce;i>=cs;i--)
+                {
+                    System.out.print(arr[re][i]+" ");
+                }
+                re--;
+            }
+            if(cs<=ce)
+            {
+                for(int i=re;i>=rs;i--)
+                {
+                    System.out.print(arr[i][cs]+" ");
+                }
+                cs++;
+            }
+        }
+    }
+}
+
+
+#-----reverse spiral----
+import java.util.*;
+public class main{
+    public static void main(String lknj[]){
+        Scanner sc = new Scanner(System.in);
+        int n1=sc.nextInt();
+        int n2=sc.nextInt();
+        int[][] arr = new int[n1][n2];
+        for(int i=0;i<n1;i++)
+        {
+            for(int j=0;j<n2;j++)
+            {
+                arr[i][j]=sc.nextInt();
+            }
+        }
+        int rowstart=0,rowend=arr.length-1;
+        int colstart=0,colend=arr[0].length-1;
+        while(rowstart<=rowend && colstart<=colend)
+        {
+            for(int i=rowstart;i<=rowend;i++)
+            {
+                System.out.print(arr[i][colstart]+" ");
+            }
+            colstart++;
+            for(int j=colstart;j<=colend;j++)
+            {
+                System.out.print(arr[rowend][j]+" ");
+            }
+            rowend--;
+            if(colstart<=colend)
+            {
+                for(int i=rowend;i>=rowstart;i--)
+                {
+                    System.out.print(arr[i][colend]+" ");
+                }
+                colend--;
+            }
+            if(rowstart<=rowend)
+            {
+                for(int j=colend;j>=colstart;j--)
+                {
+                    System.out.print(arr[rowstart][j]+" ");
+
+                }
+                rowstart++;
+            }
+        }
+    }
+}
+
+
+#----DNA SUBString----
+import java.util.*;
+public class main{
+    public static void main(String lkjh[]){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        Set<String> ss1 = new LinkedHashSet<>();
+        Set<String> ss2 = new LinkedHashSet<>();
+        List<String> al = new ArrayList<>();
+        for(int i=0;i<=s.length()-10;i++)
+        {
+            String w = s.substring(i,10+i);
+            if(ss1.contains(w))
+            ss2.add(w);
+            else
+            ss1.add(w);
+        }
+        al.addAll(ss2);
+        for(String i:al)
+        System.out.println(i);
+    }
+}
+
+
+#------binary difference----
+import java.util.*;
+public class main{
+    public static void main(String lkjh[]){
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        StringBuilder sb = new StringBuilder();
+        List<Integer> al = new ArrayList<>();
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)>='0' && s.charAt(i)<='9')
+            {
+                sb.append(s.charAt(i));
+                if(s.charAt(i+1)==',' || s.charAt(i+1)==']')
+                {
+                    int l = Integer.parseInt(sb.toString());
+                    al.add(l);
+                    sb.setLength(0);
+                }
+            }
+        }
+        boolean turn = false;
+        int count=0;
+        String[] srr = new String[al.size()];
+        for(int i=0;i<al.size();i++)
+        {
+            int num = al.get(i);
+            String bb = Integer.toBinaryString(num);
+            srr[i]=bb;
+        }
+        String x = "01";
+        for(int i=0;i<srr.length;i++)
+        {
+            if(srr[i].length()==1 && srr[i].contains("0"))
+            srr[i]+="0";
+            else if(srr[i].length()==1 && srr[i].contains("1"))
+            {
+                srr[i]=x;
+            }
+        }
+    for(int i=0;i<srr.length-1;i++)
+            {
+                for(int j=0;j<srr[i].length();j++)
+                {
+                    if(srr[i].charAt(j)!=srr[i+1].charAt(j))
+                            count++;
+                }
+            if(count==1)
+                turn=true;
+            else
+            {
+                turn=false;
+                break;
+            }
+            count=0;
+        }
+        if(turn)
+        System.out.println("true");
+        else
+        System.out.println("false");
+    }
+}
+
+#---utf---
+import java.util.*;
+public class UTF8Validation {
+    public static boolean validUtf8(int[] data) {
+        int numberOfBytesToProcess = 0;
+        
+        for (int num : data) {
+            if (numberOfBytesToProcess == 0) {
+                if ((num >> 5) == 0b110) {
+                    numberOfBytesToProcess = 1;
+                } else if ((num >> 4) == 0b1110) {
+                    numberOfBytesToProcess = 2;
+                } else if ((num >> 3) == 0b11110) {
+                    numberOfBytesToProcess = 3;
+                } else if ((num >> 7) != 0) {
+                    return false;
+                }
+            } else {
+                if ((num >> 6) != 0b10) {
+                    return false;
+                }
+                numberOfBytesToProcess--;
+            }
+        }
+        
+        return numberOfBytesToProcess == 0;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String s = sc.nextLine();
+        int[] data1 = new int[3];
+        StringBuilder sb = new StringBuilder();
+        int k=0;
+        for(int i=0;i<s.length();i++)
+        {
+            if(s.charAt(i)>='0' && s.charAt(i)<='9')
+            {
+                sb.append(s.charAt(i));
+                if(s.charAt(i+1)==']' || s.charAt(i+1)==',')
+                {
+                    data1[k++] = Integer.parseInt(sb.toString());
+                    sb.setLength(0);
+                }
+            }
+        }
+        
+        System.out.println(validUtf8(data1)); // Output: true
+        // System.out.println(validUtf8(data2)); // Output: false
+    }
+}
